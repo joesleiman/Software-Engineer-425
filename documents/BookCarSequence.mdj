@@ -86,7 +86,7 @@
 									"font": "Arial;13;0",
 									"left": 5,
 									"top": 5,
-									"width": 1036,
+									"width": 932,
 									"height": 668,
 									"nameLabel": {
 										"$ref": "AAAAAAFwiFEIULXik+Y="
@@ -196,14 +196,14 @@
 											"left": 90,
 											"top": 105,
 											"width": 1,
-											"height": 480
+											"height": 560
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 24,
 									"top": 40,
 									"width": 131.3544921875,
-									"height": 545,
+									"height": 625,
 									"stereotypeDisplay": "icon",
 									"nameCompartment": {
 										"$ref": "AAAAAAFwiFHrPrX2ro0="
@@ -313,14 +313,14 @@
 											"left": 205,
 											"top": 80,
 											"width": 1,
-											"height": 594
+											"height": 599
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 152,
 									"top": 40,
 									"width": 106.67724609375,
-									"height": 634,
+									"height": 639,
 									"nameCompartment": {
 										"$ref": "AAAAAAFwiFKaULYapzg="
 									},
@@ -370,7 +370,7 @@
 													"top": 47,
 													"width": 131.33544921875,
 													"height": 13,
-													"text": "BookingController"
+													"text": "BookingsController"
 												},
 												{
 													"_type": "LabelView",
@@ -486,7 +486,7 @@
 													"top": 47,
 													"width": 62.736328125,
 													"height": 13,
-													"text": "Cars"
+													"text": "Car"
 												},
 												{
 													"_type": "LabelView",
@@ -763,7 +763,7 @@
 											"left": 198,
 											"top": 128,
 											"width": 14,
-											"height": 433
+											"height": 537
 										}
 									],
 									"font": "Arial;13;0",
@@ -1142,7 +1142,7 @@
 											"font": "Arial;13;0",
 											"left": 108,
 											"top": 282,
-											"width": 78.04443359375,
+											"width": 78.76806640625,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -1150,7 +1150,7 @@
 												"$ref": "AAAAAAFwiG67FLgVbfw="
 											},
 											"edgePosition": 1,
-											"text": "5 : book"
+											"text": "5 : book a car"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1251,12 +1251,12 @@
 												"$ref": "AAAAAAFwiI7ahLkwZEQ="
 											},
 											"font": "Arial;13;0",
-											"left": 180,
-											"top": 347,
+											"left": 183,
+											"top": 344,
 											"width": 140.16259765625,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": 1.8925456311917264,
+											"distance": 12.649110640673518,
 											"hostEdge": {
 												"$ref": "AAAAAAFwiI7ahLkxjMo="
 											},
@@ -1586,12 +1586,12 @@
 												"$ref": "AAAAAAFwiJDOmrm47r0="
 											},
 											"font": "Arial;13;0",
-											"left": 167,
-											"top": 456,
+											"left": 216,
+											"top": 424,
 											"width": 261.57421875,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": 0.3520442482603833,
+											"distance": 52.20153254455275,
 											"hostEdge": {
 												"$ref": "AAAAAAFwiJDOmrm5XGY="
 											},
@@ -1610,7 +1610,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 297,
-											"top": 441,
+											"top": 417,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 25,
@@ -1631,7 +1631,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 297,
-											"top": 476,
+											"top": 452,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 10,
@@ -1651,9 +1651,9 @@
 											},
 											"font": "Arial;13;0",
 											"left": 384,
-											"top": 472,
+											"top": 448,
 											"width": 14,
-											"height": 188
+											"height": 212
 										}
 									],
 									"font": "Arial;13;0",
@@ -1663,7 +1663,7 @@
 									"tail": {
 										"$ref": "AAAAAAFwiFKaUbYfLkY="
 									},
-									"points": "211:472;384:472",
+									"points": "211:448;384:448",
 									"nameLabel": {
 										"$ref": "AAAAAAFwiJDOmrm6/Xc="
 									},
@@ -2197,7 +2197,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFwiFEIULXfmlM="
 							},
-							"name": "book",
+							"name": "book a car",
 							"source": {
 								"$ref": "AAAAAAFwiFHrPbX0SC8="
 							},
@@ -2353,7 +2353,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFwiFEIULXfmlM="
 							},
-							"name": "BookingController",
+							"name": "BookingsController",
 							"represent": {
 								"$ref": "AAAAAAFwiFNFC7Y6YtM="
 							},
@@ -2365,7 +2365,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFwiFEIULXfmlM="
 							},
-							"name": "Cars",
+							"name": "Car",
 							"represent": {
 								"$ref": "AAAAAAFwiFN74LZahNw="
 							},
@@ -2425,8 +2425,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFwiFEIULXepRc="
 					},
-					"name": "Role3",
-					"type": ""
+					"name": "Role3"
 				},
 				{
 					"_type": "UMLAttribute",
@@ -2434,8 +2433,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFwiFEIULXepRc="
 					},
-					"name": "Role4",
-					"type": ""
+					"name": "Role4"
 				},
 				{
 					"_type": "UMLAttribute",
