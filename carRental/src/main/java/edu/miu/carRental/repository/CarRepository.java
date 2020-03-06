@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.miu.carRental.domain.Car;
 @Repository
-public interface CarRepository extends JpaRepository<Car,Integer>{
+public interface CarRepository extends JpaRepository<Car,Long>{
+	
 
 }
