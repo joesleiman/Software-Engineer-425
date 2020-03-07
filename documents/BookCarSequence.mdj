@@ -825,7 +825,7 @@
 												"$ref": "AAAAAAFwiFTdS7a0sHE="
 											},
 											"edgePosition": 1,
-											"text": "2 : searchAvailableCar(carModel)"
+											"text": "2 : searchAvailableCar(carModel,date)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -926,17 +926,17 @@
 												"$ref": "AAAAAAFwiGuhYrfB818="
 											},
 											"font": "Arial;13;0",
-											"left": 399,
+											"left": 408,
 											"top": 160,
-											"width": 140.15625,
+											"width": 215.09033203125,
 											"height": 13,
-											"alpha": 1.5707963267948966,
-											"distance": 10,
+											"alpha": 0.21406063843747708,
+											"distance": 47.07440918375928,
 											"hostEdge": {
 												"$ref": "AAAAAAFwiGuhYrfClF4="
 											},
 											"edgePosition": 1,
-											"text": "3 : searchCar(carModel)"
+											"text": "3 : readAvailableCars(carModel,date)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1037,9 +1037,9 @@
 												"$ref": "AAAAAAFwsJxpvbSqCog="
 											},
 											"font": "Arial;13;0",
-											"left": 655,
+											"left": 648,
 											"top": 185,
-											"width": 200.63037109375,
+											"width": 215.09033203125,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -1047,7 +1047,7 @@
 												"$ref": "AAAAAAFwsJxpvbSrqqQ="
 											},
 											"edgePosition": 1,
-											"text": "4 : readAvailableCars(carModel)"
+											"text": "4 : readAvailableCars(carModel,date)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -2849,6 +2849,28 @@
 									"subViews": [
 										{
 											"_type": "EdgeLabelView",
+											"_id": "AAAAAAFwtdFhkG+v3ug=",
+											"_parent": {
+												"$ref": "AAAAAAFwiJJUgbnogFw="
+											},
+											"model": {
+												"$ref": "AAAAAAFwiJJUfLnnuks="
+											},
+											"font": "Arial;13;0",
+											"left": 505,
+											"top": 528,
+											"width": 200.1416015625,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 10,
+											"hostEdge": {
+												"$ref": "AAAAAAFwiJJUgbnogFw="
+											},
+											"edgePosition": 1,
+											"text": "14 : makePayment(paymentDetail)"
+										},
+										{
+											"_type": "EdgeLabelView",
 											"_id": "AAAAAAFwiJJUgbnqTsg=",
 											"_parent": {
 												"$ref": "AAAAAAFwiJJUgbnogFw="
@@ -2858,7 +2880,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 602,
+											"left": 605,
 											"top": 513,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -2879,7 +2901,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 602,
+											"left": 605,
 											"top": 548,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -2912,7 +2934,10 @@
 									"tail": {
 										"$ref": "AAAAAAFwiFNFC7ZCnC0="
 									},
-									"points": "391:544;813:544",
+									"points": "397:544;813:544",
+									"nameLabel": {
+										"$ref": "AAAAAAFwtdFhkG+v3ug="
+									},
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFwiJJUgbnqTsg="
 									},
@@ -2962,7 +2987,7 @@
 							"target": {
 								"$ref": "AAAAAAFwiFNFC7Y7XIc="
 							},
-							"arguments": "carModel"
+							"arguments": "carModel,date"
 						},
 						{
 							"_type": "UMLMessage",
@@ -2970,14 +2995,14 @@
 							"_parent": {
 								"$ref": "AAAAAAFwiFEIULXfmlM="
 							},
-							"name": "searchCar",
+							"name": "readAvailableCars",
 							"source": {
 								"$ref": "AAAAAAFwiFNFC7Y7XIc="
 							},
 							"target": {
 								"$ref": "AAAAAAFwiFN74LZbneM="
 							},
-							"arguments": "carModel"
+							"arguments": "carModel,date"
 						},
 						{
 							"_type": "UMLMessage",
@@ -2992,7 +3017,7 @@
 							"target": {
 								"$ref": "AAAAAAFwsJhP47Rm+z0="
 							},
-							"arguments": "carModel"
+							"arguments": "carModel,date"
 						},
 						{
 							"_type": "UMLMessage",
@@ -3378,7 +3403,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFwiFEIULXepRc="
 					},
-					"name": "Role8"
+					"name": "Role8",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3386,7 +3412,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFwiFEIULXepRc="
 					},
-					"name": "Role9"
+					"name": "Role9",
+					"type": ""
 				}
 			]
 		}
