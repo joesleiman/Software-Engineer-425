@@ -15,10 +15,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,22 +40,56 @@ public class User {
 	
 	@Column(name = "email")
 	@NotNull(message = "*Please provide email")
+	@Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,3})$",message = "* please provide a valid email")
 	private String email;
 	
 	@Column(name = "phone_number")
 	@NotNull(message = "*Please provide phone number")
 	private String phoneNumber;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="address", nullable = false, unique = false)
-	private Address address;
+	@Column(name = "user_name")
+	@NotNull(message = "*Please provide user name") 
+    private String username;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+	@Column(name = "password")
+	@NotNull(message = "*Please provide password") 
+    private String password;
+	
+	@Column(name = "role")
+	@NotNull(message = "*Please provide role") 
+	private String role;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Booking> booking;
+	
 	public User() {
 		
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public long getUserId() {
 		return userId;
 	}
@@ -92,18 +128,12 @@ public class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 	public List<Booking> getBooking() {
 		return booking;
 	}
 	public void setBooking(List<Booking> booking) {
 		this.booking = booking;
 	}
-	
 
 }

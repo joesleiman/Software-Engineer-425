@@ -22,6 +22,7 @@ public class Car {
 	private String carVinNumber;
 	
 	@Column(name = "plate_number")
+	@NotNull(message = "*Please provide plate number")
     private Integer plateNumber;
 	
 	@Column(name = "make")
@@ -40,92 +41,74 @@ public class Car {
 	@NotNull(message = "*Please provide category name")   
     private String categoryName;
 	
-	public Car() {}
-
+	@Column(name = "car_status")
+	@NotNull(message = "*Please provide car status")   
+    private String carStatus;
 	
-	public Car(@NotNull(message = "*Please provide vehicle number") String carVinNumber, 
-			Integer plateNumber,
-			@NotNull(message = "*Please provide make") String make,
-			@NotNull(message = "*Please provide model") String model,
-			@NotNull(message = "*Please provide year") Integer year,
-			@NotNull(message = "*Please select category") String category) {
-		this.carVinNumber = carVinNumber;
-		this.plateNumber = plateNumber;
-		this.make = make;
-		this.model = model;
-		this.year = year;
-		this.categoryName = category;
+	@Column(name = "price_per_day")
+	@NotNull(message = "*Please provide car price per day")   
+    private String pricePerDay;
+	
+	public Car() {
+		
+	}
+	
+	public String getCarStatus() {
+		return carStatus;
 	}
 
+	public void setCarStatus(String carStatus) {
+		this.carStatus = carStatus;
+	}
+
+	public String getPricePerDay() {
+		return pricePerDay;
+	}
+
+	public void setPricePerDay(String pricePerDay) {
+		this.pricePerDay = pricePerDay;
+	}
 
 	public Long getCarId() {
 		return carId;
 	}
-
-
 	public void setCarId(Long carId) {
 		this.carId = carId;
 	}
-
-
 	public String getCarVinNumber() {
 		return carVinNumber;
 	}
-
-
 	public void setCarVinNumber(String carVinNumber) {
 		this.carVinNumber = carVinNumber;
 	}
-
-
 	public Integer getPlateNumber() {
 		return plateNumber;
 	}
-
-
 	public void setPlateNumber(Integer plateNumber) {
 		this.plateNumber = plateNumber;
 	}
-
-
 	public String getMake() {
 		return make;
 	}
-
-
 	public void setMake(String make) {
 		this.make = make;
 	}
-
-
 	public String getModel() {
 		return model;
 	}
-
-
 	public void setModel(String model) {
 		this.model = model;
 	}
-
-
 	public Integer getYear() {
 		return year;
 	}
-
-
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-
-
 	public String getCategoryName() {
 		return categoryName;
 	}
-
-
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
-	
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -42,27 +43,14 @@ public class Payment {
 	@NotNull(message = "*Please provide payment payment status")  
 	private String paymentStatus;
 	
-	@OneToOne
-	@JoinColumn(name="address_id", nullable = true, unique = true)
+	@ManyToOne
+	@Column(name="address_id", nullable = false)
 	@NotNull(message = "*Please provide billingAddress") 
     private Address billingAddress;
 	
-	public Payment() {}
-
-	public Payment(@NotNull(message = "*Please provide payment date") LocalDate paymentDate,
-			@NotNull(message = "*Please provide payment card number") Long cardNumber,
-			@NotNull(message = "*Please provide payment card CVV") Integer cardCVV, Double totalPrice,
-			@NotNull(message = "*Please provide payment payment status") String paymentStatus,
-			@NotNull(message = "*Please provide billingAddress") Address billingAddress) {
+	public Payment() {
 		
-		this.paymentDate = paymentDate;
-		this.cardNumber = cardNumber;
-		this.cardCVV = cardCVV;
-		this.totalPrice = totalPrice;
-		this.paymentStatus = paymentStatus;
-		this.billingAddress = billingAddress;
 	}
-
 	public Long getPaymentId() {
 		return paymentId;
 	}

@@ -26,7 +26,7 @@ public class Booking {
 	private Long bookingId;
 	
 	@Column(name = "reference_number")
-	@NotNull
+	@NotNull(message = "*Please provide reference number")
 	private String referenceNumber;
 	
 	@Column(name = "booking_date")
@@ -36,47 +36,50 @@ public class Booking {
 
 	@Column(name = "start_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "*Please provide booking start date and time")
+	@NotNull(message = "*Please provide booking start date")
     private LocalDate startDate;
 
 	@Column(name = "end_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "*Please provide booking end date and time")
+	@NotNull(message = "*Please provide booking end date")
     private LocalDate endDate;
 	
 	@Column(name = "total_price")
+	@NotNull(message = "*Please provide total price")
 	private Double totalPrice;
 	
-	@ManyToOne
-	@JoinColumn(name = "car_id", nullable = false)
+	@Column(name = "booking_status")
+	@NotNull(message = "*Please provide booking status")
+	private String bookingStatus;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@Column(name = "car_id", nullable = false)
 	private Car car;
 	
-	@OneToOne
-	@JoinColumn(name="payment_id", nullable = true, unique = true)
+	@OneToOne(cascade = CascadeType.ALL)
+	@Column(name="payment_id", nullable = false, unique = true)
 	private Payment payment;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id", nullable = false)
-	private User user;
+	@JoinColumn(name="customer_id", nullable = false)
+	private Customer customer;
 
-    public Booking() {}
-
-	public Booking(@NotNull String referenceNumber,
-			@NotNull(message = "*Please provide booking date") LocalDate bookingDate,
-			@NotNull(message = "*Please provide booking start date and time") LocalDate startDate,
-			@NotNull(message = "*Please provide booking end date and time") LocalDate endDate, 
-			Double totalPrice,
-			Car car, Payment payment, User user) {
-		this.referenceNumber = referenceNumber;
-		this.bookingDate = bookingDate;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.totalPrice = totalPrice;
-		this.car = car;
-		this.payment = payment;
-		this.user = user;
+    public Booking() {
+    	
+    }
+	
+	public String getBookingStatus() {
+		return bookingStatus;
 	}
-
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public Long getBookingId() {
 		return bookingId;
 	}
@@ -140,14 +143,5 @@ public class Booking {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 
 }

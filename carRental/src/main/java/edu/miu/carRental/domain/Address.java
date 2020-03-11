@@ -40,20 +40,6 @@ public class Address {
 	public Address(){
 		
 	}
-
-	public Address(@NotNull(message = "*Please provide street number") String streetLine,
-			@NotNull(message = "*Please provide city name") String city,
-			@NotNull(message = "*Please provide state name") String state,
-			@NotNull(message = "*Please provide zip/area code") Integer zipCode,
-			@NotNull(message = "*Please provide country name") String country) {
-		
-		this.streetLine = streetLine;
-		this.city = city;
-		this.state = state;
-		this.zipCode = zipCode;
-		this.country = country;
-	}
-
 	public Long getAddressId() {
 		return addressId;
 	}
