@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -53,15 +52,15 @@ public class Booking {
 	private String bookingStatus;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@Column(name = "car_id", nullable = false)
+	//@Column(name = "car_id", nullable = false)
 	private Car car;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@Column(name="payment_id", nullable = false, unique = true)
+	//@Column(name="payment_id", nullable = false, unique = true)
 	private Payment payment;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="customer_id", nullable = false)
+	//@Column(name="customer_id", nullable = false)
 	private Customer customer;
 
     public Booking() {

@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.carRental.domain.Car;
+import edu.miu.carRental.domain.User;
 import edu.miu.carRental.serviceImp.CarServiceImp;
 
-@Controller
+@RestController
 public class CarController {
 
     @Autowired
     private CarServiceImp carService;
     
-    @GetMapping("/login")
+    @GetMapping(value= {"/log","/"})
     public String login() {
 		return "home/login";
     }
@@ -29,37 +30,42 @@ public class CarController {
     public String logout() {
 		return "home/logout";
     }
-    
-    @PreAuthorize("hasAuthority('Employee')")
-    @GetMapping("/")
-    public String homeAdmin() {
-		return "home/admin";
-    }
+//   
+//    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @GetMapping("/admin/home")
+//    public String homeAdmin() {
+//		return "home/admin";
+//    }
+//    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+//    @GetMapping("/employee/home")
+//    public String homeEmployee() {
+//		return "home/employee";
+//    }
    
     
-    @PreAuthorize("hasAnyAuthority('Admin','Employee','Customer')")
-    @GetMapping("/cars")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+    @GetMapping("employee/cars")
     public List<Car> getAllCars() {
         return carService.findAll();
     }
-    @PreAuthorize("hasAnyAuthority('Admin','Employee')")
-    @GetMapping("/cars/{id}")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+    @GetMapping("employee/cars/{id}")
     public Car getCar(@PathVariable Long id){
         Car car= carService.findById(id);
         return car;
     }
-    @PreAuthorize("hasAuthority('Admin')")
-    @PostMapping("/cars")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("admin/cars")
     public Car addCar(@RequestBody Car car){
         return carService.save(car);
     }
-    @PreAuthorize("hasAnyAuthority('Admin','Employee')")
-    @PutMapping("/cars")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+    @PutMapping("employee/cars")
     public Car updateCar(@RequestBody Car car){
         return carService.save(car);
     }
-    @PreAuthorize("hasAuthority('Admin')")
-    @DeleteMapping(value ="/cars/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping(value ="admin/cars/{id}")
     public void deleteCar(@PathVariable Long id){
         carService.delete(id);
     }

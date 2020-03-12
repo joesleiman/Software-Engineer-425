@@ -44,7 +44,7 @@ public class Payment {
 	private String paymentStatus;
 	
 	@ManyToOne
-	@Column(name="address_id", nullable = false)
+	//@Column(name="address_id", nullable = false)
 	@NotNull(message = "*Please provide billingAddress") 
     private Address billingAddress;
 	

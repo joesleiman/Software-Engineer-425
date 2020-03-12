@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <link
@@ -8,14 +8,15 @@
 	rel="stylesheet"
 	integrity="sha384-LV/SIoc08vbV9CCeAwiz7RJZMI5YntsH8rGov0Y2nysmepqMWVvJqds6y0RaxIXT"
 	crossorigin="anonymous">
-<title>customer</title>
+<title>Login</title>
 </head>
 <body>
 	<div class="container">
 		<h3 style="text-align: center">Login Please</h3>
 		<!-- ${SPRING_SECURITY_LAST_EXCEPTION.message} -->
 		<br />
-		<form action="/login" method="post">
+		<!-- {role}(role=${user.getRole().getRoleName() -->
+		<form action="/admin/home"  method="get">
 			<div class="form-group">
 				<label for="exampleInputEmail1">User Name</label> <input
 					type="text" class="form-control" id="exampleInputEmail1"
