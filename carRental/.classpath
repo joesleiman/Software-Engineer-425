@@ -28,5 +28,32 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/28.2-jre/guava-28.2-jre.jar" sourcepath="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/28.2-jre/guava-28.2-jre-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.google.guava"/>
+			<attribute name="maven.artifactId" value="guava"/>
+			<attribute name="maven.version" value="28.2-jre"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/20.0/guava-20.0.jar" sourcepath="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/20.0/guava-20.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.google.guava"/>
+			<attribute name="maven.artifactId" value="guava"/>
+			<attribute name="maven.version" value="20.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/28.1-jre/guava-28.1-jre.jar" sourcepath="/Users/tesfaigebrekidan/.m2/repository/com/google/guava/guava/28.1-jre/guava-28.1-jre-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.google.guava"/>
+			<attribute name="maven.artifactId" value="guava"/>
+			<attribute name="maven.version" value="28.1-jre"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

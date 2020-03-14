@@ -23,7 +23,7 @@ public class Car {
 	
 	@Column(name = "plate_number")
 	@NotNull(message = "*Please provide plate number")
-    private Integer plateNumber;
+    private String plateNumber;
 	
 	@Column(name = "make")
 	@NotNull(message = "*Please provide make")
@@ -47,7 +47,7 @@ public class Car {
 	
 	@Column(name = "price_per_day")
 	@NotNull(message = "*Please provide car price per day")   
-    private String pricePerDay;
+    private Double pricePerDay;
 	
 	public Car() {
 		
@@ -61,11 +61,11 @@ public class Car {
 		this.carStatus = carStatus;
 	}
 
-	public String getPricePerDay() {
+	public Double getPricePerDay() {
 		return pricePerDay;
 	}
 
-	public void setPricePerDay(String pricePerDay) {
+	public void setPricePerDay(Double pricePerDay) {
 		this.pricePerDay = pricePerDay;
 	}
 
@@ -81,10 +81,10 @@ public class Car {
 	public void setCarVinNumber(String carVinNumber) {
 		this.carVinNumber = carVinNumber;
 	}
-	public Integer getPlateNumber() {
+	public String getPlateNumber() {
 		return plateNumber;
 	}
-	public void setPlateNumber(Integer plateNumber) {
+	public void setPlateNumber(String plateNumber) {
 		this.plateNumber = plateNumber;
 	}
 	public String getMake() {

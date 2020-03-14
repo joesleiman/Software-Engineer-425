@@ -1,85 +1,79 @@
 package edu.miu.carRental.config;
 
-import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configuration
+import edu.miu.carRental.repository.UserRepository;
+import edu.miu.carRental.serviceImp.CarRentalUserDetailsService;
+
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
+@EnableJpaRepositories(basePackageClasses = UserRepository.class)
+@Configuration
 public class CarRentalWebSecurity extends WebSecurityConfigurerAdapter {
-
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable()//disable the default login page
-//		.authorizeRequests()
-//		.antMatchers("/login")//permitting unauthenticated access to /login
-//		.permitAll()//any request must login
-//		.anyRequest().authenticated()//any request must authenticated
-//		.and()
-//		.formLogin()
-//		.loginPage("/login")//your login page url
-//		.permitAll()
-//		.and()
-//		.logout()
-//		.invalidateHttpSession(true)
-//		.clearAuthentication(true)
-//		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//		.logoutSuccessUrl("/logout-success")//url after logout successfully
-//		.deleteCookies("JSESSIONID")
-//		.permitAll()
-//		.and()
-//		.exceptionHandling();
-//	}
-
-	// @Bean
-//	@Override
-//	public UserDetailsService userDetailsService() {
-//		List<UserDetails> users=new ArrayList<>();
-//		users.add(User.withDefaultPasswordEncoder()
-//				.username("admin")
-//				.password("123")
-//				.roles("Admin")
-//				.build());
-//		users.add(User.withDefaultPasswordEncoder()
-//				.username("emp")
-//				.password("123")
-//				.roles("Employee")
-//				.build());
-//		return new InMemoryUserDetailsManager(users);
-//	}
 	@Autowired
-	private UserDetailsService userDetailsService;
-
-	@Bean
-	public AuthenticationProvider authProvider() {
-		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-		// to fetch data from DB
-		provider.setUserDetailsService(userDetailsService);
-		// passwordEncoder
-		// NoOpPasswordEncoder.getInstance()--for plain text
-		provider.setPasswordEncoder(passwordEncoder());
-		return provider;
+	private CarRentalUserDetailsService userDetailsService;
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+		.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder()) ;
 	}
-	@Bean
-    public PasswordEncoder passwordEncoder(){
+
+	
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.csrf().disable()//disable the default login page
+		.authorizeRequests()
+		.antMatchers("/home","/","/js/*","/css/*").permitAll()//any request must login
+		.antMatchers("/admin/**","/employee/**").authenticated()//such request must be authenticated
+		.anyRequest().permitAll()
+		.and()
+		.formLogin()
+		.loginPage("/login")//your login page url
+		.permitAll()
+		.and()
+		.logout()
+		.invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/logout-success")//url after logout successfully
+		.permitAll();
+	
+	
+	
+	}
+
+	
+	private PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+	
+//	private PasswordEncoder passwordEncoder() {
+//        return new PasswordEncoder() {
+//            @Override
+//            public String encode(CharSequence charSequence) {
+//                return charSequence.toString();
+//            }
+//
+//            @Override
+//            public boolean matches(CharSequence charSequence, String s) {
+//                return true;
+//            }
+//        };
+//    }
 
 }
