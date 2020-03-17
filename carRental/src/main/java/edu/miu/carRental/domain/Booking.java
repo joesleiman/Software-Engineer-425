@@ -72,24 +72,6 @@ public class Booking implements Serializable{
     public Booking() {
     	
     }
-    
-    public Booking(@NotNull String referenceNumber,
-			@NotNull(message = "*Please provide booking date") LocalDate bookingDate,
-			@NotNull(message = "*Please provide booking start date and time") LocalDate startDate,
-			@NotNull(message = "*Please provide booking end date and time") LocalDate endDate, 
-			Double totalPrice, String bookingStatus,
-			Car car, Payment payment, Customer customer) {
-		this.referenceNumber = referenceNumber;
-		this.bookingDate = bookingDate;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.totalPrice = totalPrice;
-		this.car = car;
-		this.payment = payment;
-		this.customer = customer;
-		this.bookingStatus = bookingStatus;
-	}
-	
 	public String getBookingStatus() {
 		return bookingStatus;
 	}

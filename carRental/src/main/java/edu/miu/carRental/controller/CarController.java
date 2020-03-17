@@ -22,26 +22,6 @@ public class CarController {
     @Autowired
     private CarServiceImp carService;
     
-    @GetMapping(value= {"/log","/"})
-    public String login() {
-		return "home/login";
-    }
-    @GetMapping("/logout-success")
-    public String logout() {
-		return "home/logout";
-    }
-//   
-//    @PreAuthorize("hasAnyRole('ADMIN')")
-//    @GetMapping("/admin/home")
-//    public String homeAdmin() {
-//		return "home/admin";
-//    }
-//    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
-//    @GetMapping("/employee/home")
-//    public String homeEmployee() {
-//		return "home/employee";
-//    }
-   
     
     @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
     @GetMapping("employee/cars")

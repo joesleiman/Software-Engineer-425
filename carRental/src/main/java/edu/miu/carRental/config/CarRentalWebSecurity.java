@@ -1,7 +1,6 @@
 package edu.miu.carRental.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,10 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import edu.miu.carRental.repository.UserRepository;
 import edu.miu.carRental.serviceImp.CarRentalUserDetailsService;
+import edu.miu.carRental.serviceImp.CustomAuthenticationProvider;
 
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,9 +23,15 @@ import edu.miu.carRental.serviceImp.CarRentalUserDetailsService;
 public class CarRentalWebSecurity extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CarRentalUserDetailsService userDetailsService;
+	
+	@Autowired
+	private CustomAuthenticationProvider authenticationProvider;
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
+		.authenticationProvider(authenticationProvider)
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(passwordEncoder()) ;
 	}
@@ -35,45 +40,23 @@ public class CarRentalWebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-		.csrf().disable()//disable the default login page
-		.authorizeRequests()
-		.antMatchers("/home","/","/js/*","/css/*").permitAll()//any request must login
-		.antMatchers("/admin/**","/employee/**").authenticated()//such request must be authenticated
-		.anyRequest().permitAll()
+	http
+			.cors()
 		.and()
-		.formLogin()
-		.loginPage("/login")//your login page url
-		.permitAll()
+			.csrf().disable()
+			.authorizeRequests()
+			.antMatchers("/admin/**","/employee/**").authenticated()//such request must be authenticated
+			.anyRequest().permitAll()
 		.and()
-		.logout()
-		.invalidateHttpSession(true)
-		.clearAuthentication(true)
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/logout-success")//url after logout successfully
-		.permitAll();
+			.httpBasic();
 	
 	
 	
 	}
 
 	
-	private PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-	
-//	private PasswordEncoder passwordEncoder() {
-//        return new PasswordEncoder() {
-//            @Override
-//            public String encode(CharSequence charSequence) {
-//                return charSequence.toString();
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence charSequence, String s) {
-//                return true;
-//            }
-//        };
-//    }
 
 }

@@ -10,13 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -41,14 +40,14 @@ public class User {
 	
 	@Column(name = "email")
 	@NotNull(message = "*Please provide email")
-	@Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,3})$",message = "* please provide a valid email")
+	@Email(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,3})$",message = "* please provide a valid email")
 	private String email;
 	
 	@Column(name = "phone_number")
 	@NotNull(message = "*Please provide phone number")
 	private String phoneNumber;
 	
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
 	@NotNull(message = "*Please provide user name") 
     private String username;
 	
@@ -58,13 +57,9 @@ public class User {
 	
 	
 	@NotNull(message = "*Please provide role") 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
-	
-//	@OneToMany( cascade = CascadeType.ALL)
-//	@JoinTable(name = "user_bookings",joinColumns=@JoinColumn(name="booking_id"))
-//	private List<Booking> booking;
 	
 	public User() {
 		
@@ -79,7 +74,6 @@ public class User {
 		this.lastName=user.getLastName();
 		this.phoneNumber=user.getPhoneNumber();
 		this.roles=user.getRoles();
-//		this.booking=user.getBooking();
 		
 		
 	}
@@ -143,12 +137,5 @@ public class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-//	public List<Booking> getBooking() {
-//		return booking;
-//	}
-//	public void setBooking(List<Booking> booking) {
-//		this.booking = booking;
-//	}
 
 }
