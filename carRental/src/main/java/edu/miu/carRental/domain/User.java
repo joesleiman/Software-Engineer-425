@@ -19,6 +19,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -36,6 +38,7 @@ public class User {
 	
 	@Column(name = "date_of_birth")
 	@NotNull(message = "*Please provide date of birth")
+	@DateTimeFormat(pattern = "YYYY/MM/dd")
 	private LocalDate dateOfBirth;
 	
 	@Column(name = "email")
@@ -45,6 +48,7 @@ public class User {
 	
 	@Column(name = "phone_number")
 	@NotNull(message = "*Please provide phone number")
+	@Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message = "* please provide valid phone number")
 	private String phoneNumber;
 	
 	@Column(name = "user_name", unique = true)
