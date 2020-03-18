@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.miu.carRental.domain.Address;
 import edu.miu.carRental.domain.Booking;
 import edu.miu.carRental.domain.Car;
+import edu.miu.carRental.domain.Payment;
+import edu.miu.carRental.serviceImp.AddressServiceImp;
 import edu.miu.carRental.serviceImp.BookingServiceImp;
 import edu.miu.carRental.serviceImp.CarServiceImp;
+import edu.miu.carRental.serviceImp.PaymentServiceImp;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*")
 public class HomeController {
 	
 	@Autowired
@@ -29,6 +35,12 @@ public class HomeController {
 	
 	@Autowired
 	private BookingServiceImp bookingService;
+	
+	@Autowired
+	private PaymentServiceImp paymentService;
+	
+	@Autowired
+	private AddressServiceImp addressService;
 	
 	//@PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/cars")
@@ -51,6 +63,16 @@ public class HomeController {
     }
     
     //@PreAuthorize("hasAnyRole('USER')")
+    /*@PostMapping("/booking")
+  	public Booking addBooking(@RequestBody Booking booking) {
+  		Payment payment = booking.getPayment();
+  		Address address = payment.getBillingAddress();
+  		address = addressService.save(address);
+  		payment.setBillingAddress(address);
+  		payment = paymentService.save(payment);
+  		booking.setPayment(payment);  		
+  		return bookingService.save(booking);
+  	}*/
   	@PostMapping("/booking")
   	public Booking addBooking(@RequestBody Booking booking) {
   		return bookingService.save(booking);

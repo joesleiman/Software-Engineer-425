@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="roles")
 public class Role {
@@ -25,7 +27,8 @@ public class Role {
 	private String roleName;
 
 	@NotNull(message = "*Please provide User") 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "roles")
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,mappedBy = "roles")
+	@JsonIgnore
 	private List<User> users;
 	
 	public Role(){

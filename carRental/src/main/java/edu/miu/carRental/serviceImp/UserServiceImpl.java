@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.carRental.config.CarRentalWebSecurity;
 import edu.miu.carRental.domain.User;
@@ -11,6 +12,7 @@ import edu.miu.carRental.repository.UserRepository;
 import edu.miu.carRental.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,32 +13,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import edu.miu.carRental.domain.User;
 import edu.miu.carRental.service.UserService;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
-@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 
 public class UserController {
 
-    
-    private UserService userService;
-    
     @Autowired
-    public UserController(UserService userService) {
-		// TODO Auto-generated constructor stub
-    	this.userService=userService;
-	}
+    private UserService userService;
     
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "admin/users")
     public List<User> list() {
+   
         return userService.findAll();
     }
     
