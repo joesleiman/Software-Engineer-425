@@ -105,8 +105,8 @@ public class Booking implements Serializable{
 		//return Date.valueOf(bookingDate).toLocalDate().plusDays(1);
 	}
 
-	public void setBookingDate(LocalDate bookingDate) {
-		this.bookingDate = bookingDate;
+	public void setBookingDate() {
+		this.bookingDate = LocalDate.now();
 		//this.bookingDate = Date.valueOf(bookingDate).toLocalDate().plusDays(1);
 	}
 
