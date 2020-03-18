@@ -26,7 +26,7 @@ public class Role {
 	@NotNull(message = "*Please provide role name")
 	private String roleName;
 
-	@NotNull(message = "*Please provide User") 
+	//@NotNull(message = "*Please provide User") 
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER,mappedBy = "roles")
 	@JsonIgnore
 	private List<User> users;
