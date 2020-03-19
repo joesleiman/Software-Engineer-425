@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.carRental.domain.Address;
-import edu.miu.carRental.serviceImp.AddressServiceImp;
+import edu.miu.carRental.service.AddressService;
 
 @RestController
 public class AddressController {
+		
+	private AddressService addressService;
 	
 	@Autowired
-	private AddressServiceImp addressService;
+	public AddressController(AddressService as) {
+		this.addressService = as;
+	}
 	
 	@PostMapping("/address")
     public Address add(@RequestBody Address address){
@@ -42,7 +46,7 @@ public class AddressController {
     public Address addAddress(@RequestBody Address address){
         return addressService.save(address);
     }
-    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping("employee/address")
     public Address updateAddress(@RequestBody Address address){
         return addressService.save(address);

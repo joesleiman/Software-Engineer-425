@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.carRental.config.CarRentalWebSecurity;
 import edu.miu.carRental.domain.User;
+import edu.miu.carRental.exceptions.RecordNotFoundException;
 import edu.miu.carRental.repository.UserRepository;
 import edu.miu.carRental.service.UserService;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findById(Long id) {
 		// TODO Auto-generated method stub
-		return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User with id : " + id+" is not available"));
+		return userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("User with id : " + id+" is not available"));
 	}
 
 	@Override
@@ -46,8 +45,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		userRepository.deleteById(id);
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("User with id : " + id+" is not available"));
+		userRepository.delete(user);
 	}
 	@Override
 	public User update(User user, Long id) {
@@ -67,6 +67,5 @@ public class UserServiceImpl implements UserService {
                     return userRepository.save(user);
                 });
 	}
-	
 
 }

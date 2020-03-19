@@ -24,4 +24,6 @@ public interface BookingService {
 	public Booking findByReferenceNumber(String referenceNumber);
 	
 	public List<Booking> getBookingsWithinRange(LocalDate startDate, LocalDate endDate);
+	
+	public Booking updateBooking(Long id, Booking booking);
 }

@@ -3,6 +3,7 @@ package edu.miu.carRental.domain;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -105,9 +106,10 @@ public class Booking implements Serializable{
 		//return Date.valueOf(bookingDate).toLocalDate().plusDays(1);
 	}
 
-	public void setBookingDate() {
-		this.bookingDate = LocalDate.now();
-		//this.bookingDate = Date.valueOf(bookingDate).toLocalDate().plusDays(1);
+	public void setBookingDate(LocalDate bookingDate) {
+		//this.bookingDate = LocalDate.now();
+		this.bookingDate = bookingDate;
+		//this.bookingDate = Date.valueOf(bookingDate).toLocalDate();
 	}
 
 	public LocalDate getStartDate() {
@@ -135,7 +137,8 @@ public class Booking implements Serializable{
 	}
 
 	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
+		long duration = ChronoUnit.DAYS.between(this.startDate, this.endDate);
+		this.totalPrice = duration*this.getCar().getPricePerDay();
 	}
 
 	public Car getCar() {
@@ -153,5 +156,7 @@ public class Booking implements Serializable{
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
+	
+	
 
 }

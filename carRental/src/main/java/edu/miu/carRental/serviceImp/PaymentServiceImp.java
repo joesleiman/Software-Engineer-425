@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.miu.carRental.domain.Payment;
+import edu.miu.carRental.exceptions.RecordNotFoundException;
 import edu.miu.carRental.repository.PaymentRepository;
 import edu.miu.carRental.service.PaymentService;
 
@@ -30,12 +31,14 @@ public class PaymentServiceImp implements PaymentService{
 	@Override
 	public Payment findById(Long id) {
 		// TODO Auto-generated method stub
-		return paymentRepository.findById(id).orElse(null);
+		return paymentRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Payment with id : " + id+" is not available"));
 	}
 
 	@Override
 	public void delete(Long id) {
-		paymentRepository.deleteById(id);
+		Payment payment = paymentRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Payment with id : " + id+" is not available"));
+		paymentRepository.delete(payment);
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import edu.miu.carRental.domain.Booking;
+import edu.miu.carRental.exceptions.RecordNotFoundException;
 import edu.miu.carRental.repository.BookingRepository;
 import edu.miu.carRental.service.BookingService;
 
@@ -30,7 +31,7 @@ public class BookingServiceImp implements BookingService {
 	public Booking findById(Long id) {
 		//return bookingRepository.findById(id).orElse(null);
 		return bookingRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Booking with id : " + id+" is not available"));
+				.orElseThrow(() -> new RecordNotFoundException("Booking with id : " + id+" is not available"));
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class BookingServiceImp implements BookingService {
 	@Override
 	public void delete(Long id) {
 		Booking booking = bookingRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Booking with id : " + id+" is not available"));
+				.orElseThrow(() -> new RecordNotFoundException("Booking with id : " + id+" is not available"));
 		
 		bookingRepository.delete(booking);
 	}
@@ -49,7 +50,7 @@ public class BookingServiceImp implements BookingService {
 	@Override
 	public Booking changeBookingStatus(String referenceNumber, String status) {
 		Booking booking = bookingRepository.findByReferenceNumber(referenceNumber)
-				.orElseThrow(() -> new IllegalArgumentException("Booking with reference number: " + referenceNumber + " is not available."));
+				.orElseThrow(() -> new RecordNotFoundException("Booking with reference number: " + referenceNumber + " is not available."));
 		booking.setBookingStatus(status);
 		
 		return bookingRepository.save(booking);
@@ -101,7 +102,7 @@ public class BookingServiceImp implements BookingService {
 	@Override
 	public Booking customerCancelBooking(String referenceNumber, String status) {
 		Booking booking = bookingRepository.findByReferenceNumber(referenceNumber)
-				.orElseThrow(() -> new IllegalArgumentException("Booking with reference number: " + referenceNumber + " is not available."));
+				.orElseThrow(() -> new RecordNotFoundException("Booking with reference number: " + referenceNumber + " is not available."));
 		booking.setBookingStatus(status);
 		
 		return bookingRepository.save(booking);
@@ -118,5 +119,25 @@ public class BookingServiceImp implements BookingService {
 		LocalDate searchEndDate = LocalDate.parse(endDate.toString(), DateTimeFormatter.ISO_DATE);
 		return bookingRepository.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(searchStartDate, searchEndDate);
 				
+	}
+
+	@Override
+	public Booking updateBooking(Long id, Booking booking) {
+		return bookingRepository.findById(id)
+                .map(b -> {
+                	b.setBookingId(id);
+                	b.setReferenceNumber(booking.getReferenceNumber());
+                	b.setBookingDate(booking.getBookingDate());
+                	b.setStartDate(booking.getStartDate());
+                	b.setEndDate(booking.getEndDate());
+                	b.setBookingStatus(booking.getBookingStatus());
+                	b.setTotalPrice(booking.getTotalPrice());
+                	b.setCustomer(booking.getCustomer());
+                	b.setCar(booking.getCar());
+                	b.setPayment(booking.getPayment());
+                return bookingRepository.save(b);
+               }).orElseGet(() -> {
+                    return bookingRepository.save(booking);
+                });
 	}
 }

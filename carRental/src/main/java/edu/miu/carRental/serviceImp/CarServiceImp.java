@@ -36,4 +36,23 @@ public class CarServiceImp implements CarService{
 		carRepository.delete(car);
 	}
 
+	@Override
+	public Car updateCar(Long Id, Car car) {
+		// TODO Auto-generated method stub
+		return carRepository.findById(Id)
+                .map(carToUpdate -> {
+                	carToUpdate.setCarStatus(car.getCarStatus());
+                	carToUpdate.setCarVinNumber(car.getCarVinNumber());
+                	carToUpdate.setCategoryName(car.getCategoryName());		
+                	carToUpdate.setMake(car.getMake());
+                	carToUpdate.setModel(car.getModel());
+                	carToUpdate.setPlateNumber(car.getPlateNumber());
+                	carToUpdate.setPricePerDay(car.getPricePerDay());
+                	carToUpdate.setYear(car.getYear());
+                return carRepository.save(carToUpdate);
+               }).orElseGet(() -> {
+                    return carRepository.save(car);
+                });
+	}
+
 }

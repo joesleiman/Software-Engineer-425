@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.miu.carRental.domain.Customer;
+import edu.miu.carRental.exceptions.RecordNotFoundException;
 import edu.miu.carRental.repository.CustomerRepository;
 import edu.miu.carRental.service.CustomerService;
 
@@ -30,12 +31,15 @@ public class CustomerServiceImp implements CustomerService{
 	@Override
 	public Customer findById(Long id) {
 		// TODO Auto-generated method stub
-		return customerRepository.findById(id).orElse(null);
+		return customerRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Customer with id : " + id+" is not available"));
 	}
 
 	@Override
 	public void delete(Long id) {
-		customerRepository.deleteById(id);
+		Customer customer = customerRepository.findById(id)
+				.orElseThrow(() -> new RecordNotFoundException("Customer with id : " + id+" is not available"));
+		customerRepository.delete(customer);
 	}
 
 }

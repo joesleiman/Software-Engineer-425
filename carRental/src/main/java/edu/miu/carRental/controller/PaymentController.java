@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.carRental.domain.Payment;
-import edu.miu.carRental.serviceImp.PaymentServiceImp;
+import edu.miu.carRental.service.PaymentService;
 
 
 @RestController
 public class PaymentController {
 	
 	@Autowired
-	private PaymentServiceImp paymentService;
+	private PaymentService paymentService;
 	
 	@PostMapping("/payment")
     public Payment add(@RequestBody Payment payment){
@@ -38,11 +38,7 @@ public class PaymentController {
     	Payment payment= paymentService.findById(id);
         return payment;
     }
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/admin/payments")
-    public Payment addPayment(@RequestBody Payment payment){
-        return paymentService.save(payment);
-    }
+   
     @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
     @PutMapping("/employee/payments")
     public Payment updatePayment(@RequestBody Payment payment){
